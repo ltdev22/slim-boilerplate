@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\ViewServiceProvider;
 use League\Container\Container;
 use Slim\Factory\AppFactory;
 
@@ -12,6 +13,7 @@ AppFactory::setContainer($container);
 // Creating a Slim app
 $app = AppFactory::create();
 
+$container->addServiceProvider(new ViewServiceProvider);
 require_once __DIR__ . '/container.php';
 
 // Load the routes
