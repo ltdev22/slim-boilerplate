@@ -1,6 +1,6 @@
 <?php
 
-$app->get('/', function ($request, $response, $args) {
-    $response->getBody()->write("Hello world!");
+$app->get('/', function ($request, $response, $args) use ($container) {
+    $response->getBody()->write($container->get('greeting'));
     return $response;
 });
