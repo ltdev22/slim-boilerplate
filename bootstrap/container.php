@@ -1,5 +1,5 @@
 <?php
 
-$container->add('greeting', function() {
-    return 'Hello from container!';
-});
+use App\Providers\ViewServiceProvider;
+
+$container->addServiceProvider(new ViewServiceProvider());

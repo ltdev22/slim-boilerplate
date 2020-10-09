@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Slim\Views\Twig;
 
 class ViewServiceProvider extends AbstractServiceProvider
 {
@@ -23,8 +24,15 @@ class ViewServiceProvider extends AbstractServiceProvider
     {
         $container = $this->getContainer();
 
-        $container->add('view', function () {
-            return 'Hello VSP';
-        });
+        // Add new Twig instance to view container
+        $container->add(
+            'view',
+            Twig::create(
+                __DIR__ . '/../../resources/views', // specify the path for the views
+                [
+                    'cache' => false,
+                ]
+            )
+        );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-use App\Providers\ViewServiceProvider;
 use League\Container\Container;
 use Slim\Factory\AppFactory;
+use Slim\Views\TwigMiddleware;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -10,11 +10,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $container = new Container();
 AppFactory::setContainer($container);
 
+require_once __DIR__ . '/container.php';
+
 // Creating a Slim app
 $app = AppFactory::create();
-
-$container->addServiceProvider(new ViewServiceProvider);
-require_once __DIR__ . '/container.php';
+$app->add(TwigMiddleware::createFromContainer($app));
 
 // Load the routes
 require_once __DIR__ . '/../routes/web.php';
