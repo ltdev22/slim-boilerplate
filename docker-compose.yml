@@ -14,7 +14,19 @@ services:
             - ./.env
         networks:
             - localnet
-
+    node:
+        build:
+            context: .
+            dockerfile: docker/node/Dockerfile
+        container_name: slim_boilerplate_node
+        volumes:
+            - ./public:/var/www/html/public
+            - ./resources:/var/www/html/resources
+            - ./tailwind.config.js:/var/www/html/tailwind.config.js
+volumes:
+    node_modules:
+    web-root:
+        driver: local
 networks:
     localnet:
         driver: 'bridge'
