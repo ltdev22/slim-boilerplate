@@ -1,7 +1,32 @@
-/* Tailwind Css */
-
 @tailwind base;
 
 @tailwind components;
 
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl;
+    }
+    p {
+        @apply py-2 leading-relaxed;
+    }
+    a {
+        @apply text-blue-500 no-underline;
+    }
+    a:hover {
+        @apply underline;
+    }
+}
+
+@layer components {
+    .nav-list-item {
+        @apply inline-block mr-3 py-2 px-4;
+    }
+    .nav-link {
+        @apply text-blue-500 no-underline;
+    }
+    .nav-link:hover {
+        @apply text-gray-800 no-underline;
+    }
+}

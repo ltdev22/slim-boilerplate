@@ -6,12 +6,12 @@
     <link href="css/output.css" type="text/css" rel="stylesheet" />
     <title>SlimBoilerplate</title>
 </head>
-<body>
-    <header class="header">
+<body class="pt-40">
+    <header class="fixed z-10 top-0 w-full">
         {% include 'components/header/menu.twig' %}
     </header><!-- /.header -->
 
-    <section class="content">
+    <section class="container mx-auto">
         {% block content %}{% endblock %}
     </section><!-- /.content -->
 </body>
