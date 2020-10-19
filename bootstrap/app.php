@@ -1,10 +1,20 @@
 <?php
 
+use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Cartalyst\Sentinel\Native\SentinelBootstrapper;
 use League\Container\Container;
 use Slim\Factory\AppFactory;
 use Slim\Views\TwigMiddleware;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+
+Sentinel::instance(
+    new SentinelBootstrapper(
+        require(__DIR__ . '/../config/auth.php')
+    )
+);
+
+require_once __DIR__ . '/database.php';
 
 // Specify the container we use for the Slim app
 $container = new Container();
