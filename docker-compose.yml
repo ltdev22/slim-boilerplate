@@ -14,6 +14,8 @@ services:
             - ./.env
         networks:
             - localnet
+        depends_on:
+            - mysql
     node:
         build:
             context: .
@@ -23,10 +25,22 @@ services:
             - ./public:/var/www/html/public
             - ./resources:/var/www/html/resources
             - ./tailwind.config.js:/var/www/html/tailwind.config.js
+    mysql:
+        container_name: slim_boilerplate_db
+        image: mysql:5.7
+        volumes:
+            - dbdata:/var/lib/mysql
+        ports:
+            - 4306:3306
+        networks:
+            - localnet
+        env_file:
+            - ./.env
 volumes:
-    node_modules:
+    dbdata:
     web-root:
-        driver: local
+    node_modules:
+        driver: 'local'
 networks:
     localnet:
         driver: 'bridge'
