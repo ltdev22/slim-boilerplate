@@ -21,6 +21,7 @@ $container = new Container();
 AppFactory::setContainer($container);
 
 require_once __DIR__ . '/container.php';
+require_once __DIR__ . '/controllers.php';
 
 // Creating a Slim app
 $app = AppFactory::create();

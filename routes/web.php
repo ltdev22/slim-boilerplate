@@ -1,8 +1,8 @@
 <?php
 
-$app->get('/', function ($request, $response, $args) use ($container) {
-    return $container->get('view')->render($response, 'pages/home.twig', ['foo' => 'test']);
-})->setName('home');
+use App\Controllers\HomeController;
+
+$app->get('/', HomeController::class)->setName('home');
 
 $app->get('/about', function ($request, $response, $args) use ($container) {
     return $container->get('view')->render($response, 'pages/about.twig');
