@@ -1,6 +1,6 @@
 <nav class="flex items-center justify-between flex-wrap bg-white shadow-lg border-b border-blue-400 p-6">
     <div class="flex items-center flex-shrink-0 mr-6">
-        <a class="no-underline hover:no-underline" href="#">
+        <a class="no-underline hover:no-underline" href="{{ url_for('home') }}">
             <span class="text-2xl pl-2">SlimBoilerplate</span>
         </a>
     </div>
@@ -15,15 +15,23 @@
     </div>
 
     <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0 hidden" id="nav-content">
-        <ul class="nav-list list-reset lg:flex justify-end flex-1 items-center">
+        <ul class="nav-list list-reset lg:flex justify-start flex-1 items-center">
             <li class="nav-list-item">
-                <a class="nav-link" href="#">Active</a>
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
             <li class="nav-list-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-list-item">
                 <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+            <li class="nav-list-item">
+                <a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
             </li>
             <li class="nav-list-item">
                 <a class="nav-link" href="#">Link</a>
