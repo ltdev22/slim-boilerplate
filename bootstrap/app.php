@@ -21,11 +21,12 @@ $container = new Container();
 AppFactory::setContainer($container);
 
 require_once __DIR__ . '/container.php';
-require_once __DIR__ . '/controllers.php';
 
 // Creating a Slim app
 $app = AppFactory::create();
 $app->add(TwigMiddleware::createFromContainer($app));
+
+require_once __DIR__ . '/controllers.php';
 
 // Load the routes
 require_once __DIR__ . '/../routes/web.php';

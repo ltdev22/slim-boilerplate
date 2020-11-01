@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\Auth\LoginController;
+use App\Controllers\Auth\LogoutController;
 use App\Controllers\HomeController;
 
 // We attach to the container any of the conrtollers we are using
@@ -14,5 +15,11 @@ $container->add(HomeController::class, function () use ($container) {
 $container->add(LoginController::class, function () use ($container) {
     return new LoginController(
         $container->get('view')
+    );
+});
+
+$container->add(LogoutController::class, function () use ($app) {
+    return new LogoutController(
+        $app->getRouteCollector()->getRouteParser()
     );
 });
