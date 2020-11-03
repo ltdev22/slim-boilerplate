@@ -32,7 +32,7 @@
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
             {% if user %}
                 <li class="nav-list-item">
-                    <a href="#" class="nav-link">Hi, {{ user.first_name }}</a>
+                    Hi, <a href="#" class="nav-link">{{ user.first_name }}</a>
                 </li>
                 <li class="nav-list-item">
                     <a href="{{ url_for('auth.logout') }}" class="nav-link">Sign Out</a>
@@ -42,7 +42,7 @@
                     <a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a>
                 </li>
                 <li class="nav-list-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Sign Up</a>
                 </li>
             {% endif %}
         </ul>

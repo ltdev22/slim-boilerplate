@@ -47,6 +47,10 @@ class ViewServiceProvider extends AbstractServiceProvider
      */
     protected function registerGlobals(Twig $twig)
     {
+        $container = $this->getContainer();
+
         $twig->getEnvironment()->addGlobal('user', Sentinel::check());
+
+        $twig->getEnvironment()->addGlobal('status', $container->get('flash')->getFirstMessage('status'));
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Controllers\Auth;
 
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Slim\Flash\Messages;
+use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
 
 class LoginController
@@ -15,13 +17,31 @@ class LoginController
     protected $view;
 
     /**
+     * Hold the flash message instance.
+     *
+     * @var Messages
+     */
+    protected $flash;
+
+    /**
+     * Hold the route parser instance.
+     *
+     * @var RouteParserInterface
+     */
+    protected $routeParser;
+
+    /**
      * Creating a new instance of this object.
      *
      * @param Twig $view
+     * @param Messages $flash
+     * @param RouteParserInterface $routeParser
      * @return $this
      */
-    public function __construct(Twig $view) {
+    public function __construct(Twig $view, Messages $flash, RouteParserInterface $routeParser) {
         $this->view = $view;
+        $this->flash = $flash;
+        $this->routeParser =  $routeParser;
     }
 
     /**
@@ -47,10 +67,27 @@ class LoginController
     {
         $data = $request->getParsedBody();
 
-        if (!$user = Sentinel::authenticate($data)) {
-            dd('Incorrect credentials');
+        try {
+            if (!$user = Sentinel::authenticate($data)) {
+                throw new \Exception('Incorrect email or password :(');
+            }
+        } catch (\Exception $e) {
+            $this->flash->addMessage('status', $e->getMessage());
+
+            return $response->withHeader('Location', $this->redirectTo('auth.login'));
         }
-        dd($user);
-        return $response;
+
+        return $response->withHeader('Location', $this->redirectTo('home'));
+    }
+
+    /**
+     * Get the route name we want to redirect to after logout.
+     *
+     * @param String $routeName
+     * @return void
+     */
+    protected function redirectTo(String $routeName)
+    {
+        return $this->routeParser->urlFor($routeName);
     }
 }

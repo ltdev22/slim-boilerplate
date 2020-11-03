@@ -12,9 +12,11 @@ $container->add(HomeController::class, function () use ($container) {
     );
 });
 
-$container->add(LoginController::class, function () use ($container) {
+$container->add(LoginController::class, function () use ($container, $app) {
     return new LoginController(
-        $container->get('view')
+        $container->get('view'),
+        $container->get('flash'),
+        $app->getRouteCollector()->getRouteParser()
     );
 });
 

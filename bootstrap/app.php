@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Cartalyst\Sentinel\Native\SentinelBootstrapper;
 use League\Container\Container;
