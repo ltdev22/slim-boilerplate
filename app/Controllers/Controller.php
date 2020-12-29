@@ -28,7 +28,10 @@ class Controller
         $validator->mapFieldsRules($rules);
 
         if (!$validator->validate()) {
-            throw new ValidationException();
+            throw new ValidationException(
+                $validator->errors(),
+                $request->getUri()->getPath()
+            );
         }
 
         return $params;
