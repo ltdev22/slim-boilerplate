@@ -2,12 +2,15 @@
 
 namespace App\Controllers\Auth;
 
+use App\Controllers\Controller;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Flash\Messages;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
 
-class LoginController
+class LoginController extends Controller
 {
     /**
      * Hold the view instance.
@@ -47,11 +50,11 @@ class LoginController
     /**
      * Show the login form
      *
-     * @param Slim\Psr7\Request $request
-     * @param Slim\Psr7\Response $response
+     * @param ServerRequestInterface    $request
+     * @param ResponseInterface         $response
      * @return void
      */
-    public function index($request, $response)
+    public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->view->render($response, 'pages/auth/login.twig');
     }
@@ -59,14 +62,18 @@ class LoginController
     /**
      * Try to sign in the user.
      *
-     * @param Slim\Psr7\Request  $request
-     * @param Slim\Psr7\Response $response
+     * @param ServerRequestInterface    $request
+     * @param ResponseInterface         $response
      * @return void
      */
-    public function signIn($request, $response)
+    public function signIn(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $data = $request->getParsedBody();
-
+        $data = $this->validate($request, [
+            'email' => ['email', 'required'],
+            'password' => ['required']
+        ]);
+        dd($data);
+ 
         try {
             if (!$user = Sentinel::authenticate($data)) {
                 throw new \Exception('Incorrect email or password :(');

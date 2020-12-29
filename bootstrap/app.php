@@ -29,6 +29,7 @@ $app = AppFactory::create();
 $app->add(TwigMiddleware::createFromContainer($app));
 
 require_once __DIR__ . '/controllers.php';
+require_once __DIR__ . '/exceptions.php';
 
 // Load the routes
 require_once __DIR__ . '/../routes/web.php';
